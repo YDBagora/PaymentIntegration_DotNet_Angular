@@ -202,9 +202,7 @@ export class EmployeeComponent implements OnInit  {
       handler: (response: any) => {
         alert("Payment successful. Razorpay Payment");
         console.log(response);
-
-        // 👉 Call your .NET Core backend to save payment info
-        // this.http.post("https://localhost:7020/api/payment/save", response).subscribe(...)
+        
       },
       prefill: {
         name: "YD",
