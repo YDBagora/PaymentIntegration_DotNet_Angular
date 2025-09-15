@@ -1,0 +1,132 @@
+<div class="container-fluid">
+    <div class="row p-2 bg-info">
+        <div class="col-6 text-white">
+            <h3>Employee List</h3>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+            <button class="btn btn-warning" (click)="openModel()">Add Employee</button>
+        </div>
+    </div>
+
+    @if(employeeList && employeeList.length > 0){
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>SNO</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Salary</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(item of employeeList; track $index){
+            <tr>
+                <td>{{$index + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.salary}}</td>
+                <td class="text-center">
+                    <button class="btn btn-primary" (click)="updateEmployee(item)">Edit</button> ||
+                    <button class="btn btn-danger" (click)="removeEmployees(item)">Delete</button> ||
+                    <button class="btn btn-success" (click)="paymentIntegration(item)">Pay</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+    @else{
+        <h5 class="text-center p-5">Employee Not Found</h5>
+    }
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal" #myModel>
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header bg-info">
+                @if(employeeForm.value.id != 0){
+                <h4 class="modal-title text-white">Update Employee</h4>
+                }
+                @else{
+                <h4 class="modal-title text-white">Add Employee</h4>
+                }
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModel()"></button>
+            </div>
+
+            <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" formControlName="name" name="name" class="form-control"
+                                placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <input type="email" formControlName="email" name="email" class="form-control"
+                                placeholder="Email">
+                        </div>
+                        <div class="col-6">
+                            <input type="" formControlName="phone" name="phone" class="form-control"
+                                placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <input type="number" formControlName="salary" name="salary" class="form-control"
+                                placeholder="Salary">
+                        </div>
+                    </div>
+
+                    <!-- <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="form-group from-check">
+                                <input type="checkbox" name="checkbox">
+                                <label>Active?</label>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    @if(employeeForm.value.id == 0){
+                        <button type="submit" [disabled]="this.employeeForm.invalid" class="btn btn-primary"
+                        data-bs-dismiss="modal">Save</button>
+                    }
+                    @else{
+                        <button type="submit" [disabled]="this.employeeForm.invalid" class="btn btn-success"
+                        data-bs-dismiss="modal">Update</button>
+                    }
+                    
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        (click)="closeModel()">Close</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModals" #myModels>
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header bg-info">
+                <h4 class="modal-title text-white">Payment</h4>
+                <br/><br/>
+                <div id="paypal-button-container"></div>
+                <button class="btn btn-dark" id="razorpay-btn" (click)="payWithRazorpay(item)">Pay with Razorpay</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closeModels()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
