@@ -17,14 +17,14 @@ namespace CRUD_Application.Controllers
         }
 
         [HttpPost("sendEmail")]
-        public async Task<IActionResult> SendEmail([FromBody] EmailRequestDto emailRequest)
+        public async Task<IActionResult> SendEmail([FromForm] EmailRequestDto emailRequest)
         {
-            if(string.IsNullOrWhiteSpace(emailRequest.ToEmail) || string.IsNullOrWhiteSpace(emailRequest.Subject) || string.IsNullOrWhiteSpace(emailRequest.Body))
+            if(string.IsNullOrWhiteSpace(emailRequest.ToEmail) || string.IsNullOrWhiteSpace(emailRequest.Subject) || string.IsNullOrWhiteSpace(emailRequest.Message))
             {
                 return BadRequest("Please Fill all the required fields?");
             }
 
-            await _emailServices.SendEmailAsync(emailRequest.ToEmail, emailRequest.Subject, emailRequest.Body);
+            await _emailServices.SendEmailAsync(emailRequest.ToEmail, emailRequest.Subject, emailRequest.Message);
             return Ok("Email Sent Successfully");    
         }
     }

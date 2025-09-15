@@ -3,33 +3,27 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using System.Net;
+
 
 namespace CRUD_Application.Services
 {
     public class EmailService : IEmailServices
     {
-        private readonly EmailSettings _emailServices;
 
-        public EmailService(IOptions<EmailSettings> emailServices)
-        {
-            _emailServices = emailServices.Value;
-        }
-
-        public async Task SendEmailAsync(string toEmail, string  subject, string body)
+        public async Task SendEmailAsync(string toEmail, string  subject, string message)
         {
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(_emailServices.SenderEmailId));
+            email.From.Add(MailboxAddress.Parse("ydbagora@gmail.com"));
             email.To.Add(MailboxAddress.Parse(toEmail));
             email.Subject = subject;
-
-            email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
-            {
-                Text = body
-            };
+            email.Body = new TextPart("plain") { Text = message };
 
             using var smtp = new SmtpClient();
-            await smtp.ConnectAsync(_emailServices.SmtpServer, _emailServices.Port, SecureSocketOptions.StartTls);
-            await smtp.AuthenticateAsync(_emailServices.UserName, _emailServices.Password);
+            await smtp.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+
+            await smtp.AuthenticateAsync("ydbagora@gmail.com", "cbvx bbqu pnat yvtm");
+
             await smtp.SendAsync(email);
             await smtp.DisconnectAsync(true);
         }

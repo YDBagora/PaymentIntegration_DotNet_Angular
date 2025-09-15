@@ -27,7 +27,7 @@ builder.Services.AddSession(option =>
 //Connecting builder.Services with SQL_Server using ApplicationContext.cs 
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-builder.Services.AddScoped<IEmailServices, EmailService>();
+builder.Services.AddTransient<IEmailServices, EmailService>();
 builder.Services.AddSignalR();
 builder.Services.AddScoped<CRUD_Application.Services.PayPalServices>();
 builder.Services.AddScoped<RazorpayService>();

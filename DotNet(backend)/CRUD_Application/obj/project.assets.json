@@ -6513,11 +6513,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\YashBagora\\CRUD_Application\\CRUD_Application\\CRUD_Application.csproj",
+      "projectUniqueName": "F:\\YashBagora\\AngularProject\\PaymentApp\\DotNet(backend)\\CRUD_Application\\CRUD_Application.csproj",
       "projectName": "CRUD_Application",
-      "projectPath": "F:\\YashBagora\\CRUD_Application\\CRUD_Application\\CRUD_Application.csproj",
+      "projectPath": "F:\\YashBagora\\AngularProject\\PaymentApp\\DotNet(backend)\\CRUD_Application\\CRUD_Application.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "F:\\YashBagora\\CRUD_Application\\CRUD_Application\\obj\\",
+      "outputPath": "F:\\YashBagora\\AngularProject\\PaymentApp\\DotNet(backend)\\CRUD_Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 24.2\\Components\\Offline Packages",
